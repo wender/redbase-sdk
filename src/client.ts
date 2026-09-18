@@ -62,7 +62,7 @@ export type RedbaseClient<Database = unknown> = SupabaseClient<Database> & {
  * @example
  * ```ts
  * // Client-side usage (anon key)
- * import { createClient } from '@rednew/redbase'
+ * import { createClient } from '@redbase/sdk'
  *
  * const rb = createClient(
  *   import.meta.env.VITE_REDBASE_URL,
@@ -77,7 +77,7 @@ export type RedbaseClient<Database = unknown> = SupabaseClient<Database> & {
  * @example
  * ```ts
  * // With Database types
- * import { createClient } from '@rednew/redbase'
+ * import { createClient } from '@redbase/sdk'
  * import type { Database } from './database.types'
  *
  * const rb = createClient<Database>(
@@ -92,7 +92,7 @@ export type RedbaseClient<Database = unknown> = SupabaseClient<Database> & {
  * @example
  * ```ts
  * // Server-side usage (service role key for email)
- * import { createClient } from '@rednew/redbase'
+ * import { createClient } from '@redbase/sdk'
  *
  * const rb = createClient(
  *   process.env.REDBASE_URL!,

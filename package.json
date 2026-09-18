@@ -1,5 +1,5 @@
 {
-  "name": "@wender/redbase-sdk",
+  "name": "@redbase/sdk",
   "version": "0.1.0",
   "description": "RedBase client SDK - Supabase-compatible BaaS for Rednew",
   "type": "module",
@@ -53,5 +53,8 @@
   },
   "engines": {
     "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

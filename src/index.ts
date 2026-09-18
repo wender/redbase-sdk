@@ -1,5 +1,5 @@
 /**
- * @rednew/redbase - RedBase client SDK
+ * @redbase/sdk - RedBase client SDK
  *
  * Supabase-compatible BaaS client for Rednew apps with additional
  * email functionality.

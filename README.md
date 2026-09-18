@@ -1,19 +1,19 @@
-# @wender/redbase-sdk
+# @redbase/sdk
 
 Official TypeScript SDK for [RedBase](https://redbase.dev) — a backend-as-a-service platform. If you're looking for an alternative to Supabase, this is it.
 
 ## Installation
 
 ```bash
-npm install @wender/redbase-sdk
+npm install @redbase/sdk
 # or
-pnpm add @wender/redbase-sdk
+pnpm add @redbase/sdk
 ```
 
 ## Quick Start
 
 ```ts
-import { createClient } from '@wender/redbase-sdk'
+import { createClient } from '@redbase/sdk'
 
 const rb = createClient(
   'https://api.redbase.dev',
@@ -93,7 +93,7 @@ const { data, error } = await rb.storage.from('photos').download('avatar.png')
 Send transactional emails with `email.send()`. This requires the **service role key** and should only be called from server-side code (API routes, edge functions, etc.).
 
 ```ts
-import { createClient } from '@wender/redbase-sdk'
+import { createClient } from '@redbase/sdk'
 
 const rb = createClient(
   process.env.REDBASE_URL!,
@@ -120,7 +120,7 @@ if (!success) {
 Use database types for full type safety:
 
 ```ts
-import { createClient } from '@wender/redbase-sdk'
+import { createClient } from '@redbase/sdk'
 import type { Database } from './database.types'
 
 const rb = createClient<Database>(
@@ -190,7 +190,7 @@ import {
   
   // Realtime types
   RealtimeChannel,
-} from '@wender/redbase-sdk'
+} from '@redbase/sdk'
 ```
 
 ## Links
