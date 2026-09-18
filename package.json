@@ -1,0 +1,57 @@
+{
+  "name": "@wender/redbase-sdk",
+  "version": "0.1.0",
+  "description": "RedBase client SDK - Supabase-compatible BaaS for Rednew",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0"
+  },
+  "devDependencies": {
+    "tsup": "^8.2.4",
+    "typescript": "^5.5.4"
+  },
+  "keywords": [
+    "redbase",
+    "rednew",
+    "supabase",
+    "baas",
+    "email"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wender/redbase-sdk.git"
+  },
+  "homepage": "https://github.com/wender/redbase-sdk#readme",
+  "bugs": {
+    "url": "https://github.com/wender/redbase-sdk/issues"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
