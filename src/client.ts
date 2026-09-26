@@ -2,6 +2,7 @@ import {
   createClient as createSupabaseClient,
   type SupabaseClient,
 } from '@supabase/supabase-js'
+import { withAppMetadata } from './app-metadata'
 import { createEmailClient } from './email'
 import type { EmailClient } from './types'
 
@@ -10,6 +11,16 @@ import type { EmailClient } from './types'
  * See @supabase/supabase-js SupabaseClientOptions for full documentation.
  */
 export interface RedbaseClientOptions {
+  /**
+   * Optional app/tenant identifier (a RedBase project slug or name, e.g.
+   * `'nivel'`). When set, `auth.signUp` merges `{ app }` into
+   * `options.data`, so the new user gets `user_metadata.app` and RedBase can
+   * brand auth emails (confirmation, recovery, ...) for this app.
+   *
+   * A `data.app` passed by the caller to `signUp` always wins. When this
+   * option is not set, `auth.signUp` behaves exactly like supabase-js.
+   */
+  app?: string
   auth?: {
     autoRefreshToken?: boolean
     persistSession?: boolean
@@ -112,13 +123,25 @@ export function createClient<Database = unknown>(
   redbaseKey: string,
   options?: RedbaseClientOptions
 ): RedbaseClient<Database> {
+  // `app` is a RedBase-only option; don't forward it to supabase-js.
+  const { app: rawApp, ...supabaseOptions } = options ?? {}
+  const app = typeof rawApp === 'string' ? rawApp.trim() : ''
+
   // Create the underlying Supabase client
   // Using any internally to avoid complex generic constraints in supabase-js
   const supabase = createSupabaseClient<Database>(
     redbaseUrl,
     redbaseKey,
-    options as Parameters<typeof createSupabaseClient>[2]
+    (options ? supabaseOptions : undefined) as Parameters<typeof createSupabaseClient>[2]
   )
+
+  // Stamp user_metadata.app on sign-up (only when the `app` option is set).
+  if (app) {
+    const auth = supabase.auth
+    const originalSignUp = auth.signUp.bind(auth)
+    auth.signUp = ((credentials) =>
+      originalSignUp(withAppMetadata(credentials, app))) as typeof auth.signUp
+  }
 
   // Create the email client
   const email = createEmailClient(redbaseUrl, redbaseKey)
