@@ -43,6 +43,37 @@ const { data: { session } } = await rb.auth.getSession()
 await rb.auth.signOut()
 ```
 
+### App-branded auth emails (`app` option)
+
+RedBase brands auth emails (signup confirmation, password recovery, ...) per
+app. The most reliable signal is `user_metadata.app` on the user. Pass the
+`app` option and the SDK sets it for you on every `auth.signUp`:
+
+```ts
+const rb = createClient(url, anonKey, { app: 'nivel' })
+
+// Sends options.data = { full_name: 'Ana', app: 'nivel' }
+await rb.auth.signUp({
+  email: 'ana@example.com',
+  password: 'securepassword',
+  options: {
+    data: { full_name: 'Ana' },
+    emailRedirectTo: `${window.location.origin}/`,
+  },
+})
+```
+
+- The value is matched against the RedBase project's slug or name (or the
+  first part of either, e.g. `nivel` for `nivel-certo`).
+- If you pass `options.data.app` to `signUp` yourself, your value wins.
+- Without the `app` option, `signUp` is plain supabase-js.
+- Still pass an explicit `emailRedirectTo` / `redirectTo` on your own domain.
+  RedBase uses it for the link target, and to pick the brand for users who
+  have no `user_metadata.app`.
+
+The helper is also exported as `withAppMetadata(credentials, app)` if you want
+to apply it by hand.
+
 ### Data Queries
 
 Query your tables with the `from()` method:
@@ -143,7 +174,11 @@ Creates a RedBase client instance.
 |-----------|------|-------------|
 | `url` | `string` | RedBase API URL (e.g., `https://api.redbase.dev`) |
 | `key` | `string` | API key — anon key for client-side, service role key for server-side |
-| `options` | `RedbaseClientOptions` | Optional client configuration |
+| `options` | `RedbaseClientOptions` | Optional client configuration (supabase-js options plus `app`) |
+
+`RedbaseClientOptions.app` (`string`, optional): RedBase app/project
+identifier. When set, `auth.signUp` merges `{ app }` into `options.data` unless
+the caller already set `data.app`.
 
 Returns a `RedbaseClient` with:
 - `auth` — Authentication methods (signUp, signIn, signOut, getSession, etc.)

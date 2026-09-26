@@ -1,6 +1,6 @@
 {
   "name": "@redbase/sdk",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "RedBase client SDK - Supabase-compatible BaaS for Rednew",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -20,12 +20,14 @@
   },
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "CHANGELOG.md"
   ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
     "typecheck": "tsc --noEmit",
+    "test": "vitest run",
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
@@ -33,7 +35,8 @@
   },
   "devDependencies": {
     "tsup": "^8.2.4",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "vitest": "^3.2.7"
   },
   "keywords": [
     "redbase",

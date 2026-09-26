@@ -9,6 +9,8 @@
 
 export { createClient, type RedbaseClient, type RedbaseClientOptions } from './client'
 
+export { withAppMetadata } from './app-metadata'
+
 export type {
   EmailClient,
   EmailSendOptions,
