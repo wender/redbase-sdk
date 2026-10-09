@@ -1,6 +1,6 @@
 {
   "name": "@redbase/sdk",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "RedBase client SDK - Supabase-compatible BaaS for Rednew",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -55,7 +55,7 @@
     "url": "https://github.com/wender/redbase-sdk/issues"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=22.0.0"
   },
   "publishConfig": {
     "access": "public"

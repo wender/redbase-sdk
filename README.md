@@ -10,6 +10,11 @@ npm install @redbase/sdk
 pnpm add @redbase/sdk
 ```
 
+**Node.js 22+** is required for server-side / Node usage (`engines.node`: `>=22`).
+`@supabase/supabase-js` realtime expects a global `WebSocket`, which Node
+provides natively from 22. Node 18 and 20 fail when constructing a client
+(`createClient`). Browsers already ship `WebSocket` and are unaffected.
+
 ## Quick Start
 
 ```ts
