@@ -1,6 +1,6 @@
 {
   "name": "@redbase/sdk",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "RedBase client SDK - Supabase-compatible BaaS for Rednew",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -31,6 +31,10 @@
     "prepublishOnly": "npm run build"
   },
   "dependencies": {
+    "@supabase/storage-js": "^2.6.0",
+    "@supabase/supabase-js": "^2.45.0"
+  },
+  "peerDependencies": {
     "@supabase/supabase-js": "^2.45.0"
   },
   "devDependencies": {

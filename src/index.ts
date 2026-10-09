@@ -26,8 +26,12 @@ export {
   FunctionsHttpError,
   FunctionsRelayError,
   FunctionRegion,
-  StorageApiError,
 } from '@supabase/supabase-js'
+
+// Re-export from storage-js: supabase-js 2.97 (in the ^2.45 range) does not
+// export StorageApiError. Node ESM then fails at import time; browser
+// bundles tree-shake the unused binding and are unaffected.
+export { StorageApiError } from '@supabase/storage-js'
 
 export type {
   SupabaseClientOptions,
