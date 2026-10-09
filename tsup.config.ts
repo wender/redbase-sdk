@@ -8,5 +8,5 @@ export default defineConfig({
   sourcemap: true,
   clean: true,
   treeshake: true,
-  external: ['@supabase/supabase-js'],
+  external: ['@supabase/supabase-js', '@supabase/storage-js'],
 })

@@ -2,6 +2,18 @@
 
 All notable changes to `@redbase/sdk` are documented here.
 
+## 0.2.2 (2026-10-09)
+
+### Fixed
+
+- Node (server-side, ESM) no longer crashes on `import '@redbase/sdk'`.
+  0.2.0/0.2.1 re-exported `StorageApiError` from `@supabase/supabase-js`,
+  which 2.97 does not export. Browser bundles were unaffected (the
+  unused binding is tree-shaken). The class is now re-exported from
+  `@supabase/storage-js`, which has provided it across the supported
+  range. `@supabase/supabase-js` `^2.45.0` is declared as both a
+  dependency and a peerDependency.
+
 ## 0.2.1 (2026-10-09)
 
 ### Changed
